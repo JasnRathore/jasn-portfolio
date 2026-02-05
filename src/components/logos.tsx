@@ -8,7 +8,9 @@ export function JSLogo() {
 export function TSLogo() {
 	return <img className="h-6 2xl:h-10 rounded-md" src="./lang/ts.svg" />
 }
-
+export function JAVALogo() {
+	return <img className="h-6 2xl:h-10 rounded-md" src="./lang/java.svg" />
+}
 export function PYLogo() {
 	return <img className="h-6 2xl:h-10 rounded-md" src="./lang/py.svg" />
 }
@@ -26,7 +28,7 @@ export function GOLogo() {
 }
 
 export function CPPLogo() {
-	return <img className="h-6 2xl:h-10 rounded-md "  src="./lang/cpp.svg" />
+	return <img className="h-6 2xl:h-10 rounded-md " src="./lang/cpp.svg" />
 }
 export function PowerShellLogo() {
 	return <img className="w-6 2xl:h-10 rounded-md" src="./lang/powershell.svg" />
