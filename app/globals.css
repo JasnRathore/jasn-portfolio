@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --background: 240 5.9% 90%;
+        --card: 0 0% 98%;
+        --foreground: 240 4.9% 83.9%;
+        --text: 240 10% 3.9%;
+        --icon: 240 10% 3.9%;
+        --heading: 240 5% 64.9%;
+        --border: 240 4.9% 83.9%;
+        --toggle: 0 0% 98%;
+    }
+
+    .dark {
+        --background: 240 10% 3.9%;
+        --card: 240 5.9% 10%;
+        --foreground: 240 3.7% 15.9%;
+        --text: 0 0% 98%;
+        --icon: 0 0% 98%;
+        --heading: 240 5.3% 26.1%;
+        --border: 240 3.7% 15.9%;
+        --toggle: 240 10% 3.9%;
+    }
+}

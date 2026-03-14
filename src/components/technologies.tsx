@@ -1,9 +1,10 @@
-import { useContext } from "react";
+import { useMemo } from "react";
+import { useTheme } from "next-themes";
 import Marquee from "react-fast-marquee";
-import { ThemeContext } from "../context";
 
 export default function Technologies() {
-	const theme = useContext(ThemeContext);
+	const { resolvedTheme } = useTheme();
+	const isLight = useMemo(() => resolvedTheme !== "dark", [resolvedTheme]);
 	
 	return (
 		<div className="p-8 2xl:p-14 flex flex-col gap-3 2xl:gap-6 w-full overflow-clip border bg-card border-border  rounded-[30px]">
@@ -12,7 +13,7 @@ export default function Technologies() {
 			</span>
 			
 			<div className="sm:hidden">
-			<Marquee speed={20} gradientWidth={100} className="w-full" gradient={true} gradientColor={theme ? "#fafafa" : "#18181b" }>
+			<Marquee speed={20} gradientWidth={100} className="w-full" gradient={true} gradientColor={isLight ? "#fafafa" : "#18181b" }>
 				<div className="flex h-20 mr-4 aspect-square bg-foreground rounded-[20px] items-center justify-center">
 					<img className="h-3/4 dark:invert" src="./tech/next-js.svg" />
 				</div>

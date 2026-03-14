@@ -16,6 +16,11 @@ export function copyToClipboard(content: string) {
 }
 
 export function getMode(): boolean {
-		const response = window.matchMedia('(prefers-color-scheme: dark)').matches;
-	  return !response;
+	if (typeof window === "undefined") {
+		// Running on the server; default to light mode.
+		return true;
+	}
+
+	const response = window.matchMedia("(prefers-color-scheme: dark)").matches;
+	return !response;
 }

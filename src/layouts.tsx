@@ -10,13 +10,15 @@ import Resume from "./components/resume"
 import Technologies from "./components/technologies"
 import ThemeControl from "./components/theme_control"
 
-import { ThemeContext } from "./context"
-import { useState, useContext } from "react"
+import { useTheme } from "next-themes"
+import { useState, useMemo } from "react"
 
 export function Max() {
-  const theme = useContext(ThemeContext);
+  const { resolvedTheme } = useTheme();
+  const isLight = useMemo(() => resolvedTheme !== "dark", [resolvedTheme]);
+
   return (
-    <div className={`${theme ? "" : "dark"} p-8 2xl:p-14 flex hidden xl:flex flex-col gap-4 2xl:gap-6 font-montserrat noise w-screen h-screen bg-background text-text`}>
+    <div className={`${isLight ? "" : "dark"} p-8 2xl:p-14 flex hidden xl:flex flex-col gap-4 2xl:gap-6 font-montserrat noise w-screen h-screen bg-background text-text`}>
       <div className="flex flex-row gap-4 2xl:gap-8 w-full ">
         <Intro />
         <Links />
@@ -43,10 +45,11 @@ export function Max() {
 }
 
 export function Mid() {
-  const theme = useContext(ThemeContext);
-	
+  const { resolvedTheme } = useTheme();
+  const isLight = useMemo(() => resolvedTheme !== "dark", [resolvedTheme]);
+  
 	return (
-    <div className={`${theme ? "" : "dark"} p-4 hidden lg:flex xl:hidden flex-col gap-4 font-montserrat noise w-screen h-full bg-background text-text`}>
+    <div className={`${isLight ? "" : "dark"} p-4 hidden lg:flex xl:hidden flex-col gap-4 font-montserrat noise w-screen h-full bg-background text-text`}>
       <div className="flex flex-row gap-4 w-full">
         <Intro />
         <Pfp />
@@ -70,10 +73,11 @@ export function Mid() {
 }
 
 export function Mobile2X() {
-  const theme = useContext(ThemeContext);
+  const { resolvedTheme } = useTheme();
+  const isLight = useMemo(() => resolvedTheme !== "dark", [resolvedTheme]);
    const [open, setOpen] = useState(false);
    return (
-     <div className={`${theme ? "" : "dark"} ${ open ? "" : "p-4"} flex lg:hidden flex-col gap-4 font-montserrat h-full w-full bg-background text-text`}>
+     <div className={`${isLight ? "" : "dark"} ${ open ? "" : "p-4"} flex lg:hidden flex-col gap-4 font-montserrat h-full w-full bg-background text-text`}>
       {open ?  
         (<AboutSlide toggleSlide={setOpen}/>)
       : (

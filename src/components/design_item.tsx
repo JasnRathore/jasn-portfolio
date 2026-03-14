@@ -1,5 +1,5 @@
-import { useState, useEffect, useContext } from "react";
-import { ThemeContext } from "../context";
+import { useState, useEffect, useMemo } from "react";
+import { useTheme } from "next-themes";
 import { 
   ExternalLinkIcon, 
   ChevronLeftIcon, 
@@ -32,7 +32,9 @@ export function DesignItem({
   const [isHovering, setIsHovering] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const theme = useContext(ThemeContext); 
+  const { resolvedTheme } = useTheme();
+  const isLight = useMemo(() => resolvedTheme !== "dark", [resolvedTheme]);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!isDialogOpen) return;
@@ -145,8 +147,8 @@ export function DesignItem({
 
         {/* Modal Dialog with Full Carousel */}
         <Dialog.Portal>
-          <Dialog.Overlay className={`${theme ? "" : "dark"} fixed inset-0 bg-foreground/80 backdrop-blur-sm z-50`} />
-          <Dialog.Content className={`${theme ? "" : "dark"} fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-[90vh] z-50 focus:outline-none`}>
+          <Dialog.Overlay className={`${isLight ? "" : "dark"} fixed inset-0 bg-foreground/80 backdrop-blur-sm z-50`} />
+          <Dialog.Content className={`${isLight ? "" : "dark"} fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-[90vh] z-50 focus:outline-none`}>
             <div className="relative bg-card rounded-xl overflow-hidden h-full flex flex-col border border-border">
               {/* Close Button */}
               <Dialog.Close asChild>
