@@ -1,8 +1,9 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
+import Image from "next/image";
 import { useTheme } from "next-themes";
-import { 
-  ExternalLinkIcon, 
-  ChevronLeftIcon, 
+import {
+  ExternalLinkIcon,
+  ChevronLeftIcon,
   ChevronRightIcon,
   Cross2Icon,
   MagnifyingGlassIcon
@@ -35,10 +36,18 @@ export function DesignItem({
   const { resolvedTheme } = useTheme();
   const isLight = useMemo(() => resolvedTheme !== "dark", [resolvedTheme]);
 
+  const handleNext = useCallback(() => {
+    setCurrentImageIndex((prev) => (prev + 1) % images.length);
+  }, [images.length]);
+
+  const handlePrev = useCallback(() => {
+    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  }, [images.length]);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!isDialogOpen) return;
-      
+
       if (e.key === "ArrowRight") {
         handleNext();
       } else if (e.key === "ArrowLeft") {
@@ -50,15 +59,7 @@ export function DesignItem({
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isDialogOpen, currentImageIndex]);
-
-  const handleNext = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % images.length);
-  };
-
-  const handlePrev = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
-  };
+  }, [isDialogOpen, handleNext, handlePrev]);
 
   const getImageContainerClass = () => {
     // Fixed height container regardless of ratio
@@ -82,18 +83,21 @@ export function DesignItem({
       {/* Image Preview with Hover/Click Handler */}
       <Dialog.Root open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <Dialog.Trigger asChild>
-          <div 
+          <div
             className={`relative ${getImageContainerClass()} overflow-hidden cursor-zoom-in bg-gray-100 dark:bg-gray-800 flex items-center justify-center`}
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
             onClick={() => setIsDialogOpen(true)}
           >
             {/* Current Image */}
-            <img
-              src={images[currentImageIndex].url}
-              alt={images[currentImageIndex].alt || `${title} design ${currentImageIndex + 1}`}
-              className={`${getImageClass()} transition-transform duration-500 group-hover:scale-105`}
-            />
+            <div className={`relative ${getImageClass()} transition-transform duration-500 group-hover:scale-105`}>
+              <Image
+                src={images[currentImageIndex].url}
+                alt={images[currentImageIndex].alt || `${title} design ${currentImageIndex + 1}`}
+                fill
+                className="object-cover"
+              />
+            </div>
 
             {/* Hover Overlay with Zoom Icon */}
             <div className={`absolute inset-0 bg-foreground/30 flex items-center justify-center transition-opacity duration-300 ${isHovering ? 'opacity-100' : 'opacity-0'}`}>
@@ -163,10 +167,11 @@ export function DesignItem({
               {/* Full-size Carousel */}
               <div className="flex-grow relative overflow-hidden">
                 {/* Current Image */}
-                <img
+                <Image
                   src={images[currentImageIndex].url}
                   alt={images[currentImageIndex].alt || `${title} design ${currentImageIndex + 1}`}
-                  className="w-full h-full object-contain"
+                  fill
+                  className="object-contain"
                 />
 
                 {/* Navigation Arrows */}

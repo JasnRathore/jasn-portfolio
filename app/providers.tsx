@@ -5,7 +5,7 @@ import { ToastContext } from '../src/context'
 import { useState } from 'react'
 
 export function Providers({ children }: { children: React.ReactNode }) {
-    const [toastOpen, setToastOpen] = useState(false)
+    const [, setToastOpen] = useState(false)
 
     return (
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>

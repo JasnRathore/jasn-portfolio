@@ -47,8 +47,8 @@ export function Max() {
 export function Mid() {
   const { resolvedTheme } = useTheme();
   const isLight = useMemo(() => resolvedTheme !== "dark", [resolvedTheme]);
-  
-	return (
+
+  return (
     <div className={`${isLight ? "" : "dark"} p-4 hidden lg:flex xl:hidden flex-col gap-4 font-montserrat noise w-screen h-full bg-background text-text`}>
       <div className="flex flex-row gap-4 w-full">
         <Intro />
@@ -65,43 +65,43 @@ export function Mid() {
       <div className="flex h-max w-full flex-row gap-4 ">
         <Gallery />
         <Projects />
-      	<Languages />
+        <Languages />
       </div>
-        <Technologies />
+      <Technologies />
     </div>
-	)
+  )
 }
 
 export function Mobile2X() {
   const { resolvedTheme } = useTheme();
   const isLight = useMemo(() => resolvedTheme !== "dark", [resolvedTheme]);
-   const [open, setOpen] = useState(false);
-   return (
-     <div className={`${isLight ? "" : "dark"} ${ open ? "" : "p-4"} flex lg:hidden flex-col gap-4 font-montserrat h-full w-full bg-background text-text`}>
-      {open ?  
-        (<AboutSlide toggleSlide={setOpen}/>)
-      : (
-      <>
-        <Intro />
-        <About toggleSlide={setOpen}/>
-      <div className="hidden md:flex">
-        <Profile />
-      </div>
-      <div className="hidden md:flex h-max w-full flex-row gap-2 ">
-        <Gallery />
-        <Projects />
-        <div className="flex flex-col ">
-          <ThemeControl  />
-        </div>
-      </div>
-      <div className="flex h-max w-full flex-col sm:flex-row gap-2 ">
-        <Links />
-        <Resume />
-      </div>
-        <Languages/>
-        <Technologies />
-      </>
-    )}
+  const [open, setOpen] = useState(false);
+  return (
+    <div className={`${isLight ? "" : "dark"} ${open ? "" : "p-4"} flex lg:hidden flex-col gap-4 font-montserrat h-full w-full bg-background text-text`}>
+      {open ?
+        (<AboutSlide toggleSlide={setOpen} />)
+        : (
+          <>
+            <Intro />
+            <About toggleSlide={setOpen} />
+            <div className="hidden md:flex">
+              <Profile />
+            </div>
+            <div className="hidden md:flex h-max w-full flex-row gap-2 ">
+              <Gallery />
+              <Projects />
+              <div className="flex flex-col ">
+                <ThemeControl />
+              </div>
+            </div>
+            <div className="flex h-max w-full flex-col sm:flex-row gap-2 ">
+              <Links />
+              <Resume />
+            </div>
+            <Languages />
+            <Technologies />
+          </>
+        )}
     </div>
   )
 }

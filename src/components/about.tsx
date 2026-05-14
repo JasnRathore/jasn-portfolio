@@ -5,7 +5,7 @@ import Projects from "./projects";
 import Gallery from "./gallery";
 
 interface AboutInterface {
-	toggleSlide: any
+	toggleSlide: (open: boolean) => void
 }
 
 export function About({ toggleSlide }: AboutInterface) {

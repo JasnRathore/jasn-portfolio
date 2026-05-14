@@ -6,7 +6,7 @@ import Image from "next/image";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import { DesignItem } from "../components/design_item";
 
-export function DesignsPage() {
+export default function DesignsPage() {
   const { resolvedTheme } = useTheme();
   const isLight = useMemo(() => resolvedTheme !== "dark", [resolvedTheme]);
   const logos = [

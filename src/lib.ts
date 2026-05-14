@@ -1,18 +1,18 @@
 export interface ThemeInterface {
 	dark: boolean
-	set: any
+	set: (dark: boolean) => void
 }
 
 
 export function openLink(link: string) {
-	window.open(link,"_blank");
+	window.open(link, "_blank");
 }
 
 export function copyToClipboard(content: string) {
-  navigator.clipboard.writeText(content).then(() => {
-  }).catch(err => {
-  	alert("Copying to Clipboard Failed: " + err);
-  });
+	navigator.clipboard.writeText(content).then(() => {
+	}).catch(err => {
+		alert("Copying to Clipboard Failed: " + err);
+	});
 }
 
 export function getMode(): boolean {

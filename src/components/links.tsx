@@ -10,11 +10,13 @@ export default function Links() {
   const mail = () => {					
     const email = "jasn.p.rathore@gmail.com";
     copyToClipboard(email);
-    setOpen(false);
-    window.clearTimeout(timerRef.current);
-    timerRef.current = window.setTimeout(() => {
-      setOpen(true);
-    }, 100);
+    if (setOpen) {
+      setOpen(false);
+      window.clearTimeout(timerRef.current);
+      timerRef.current = window.setTimeout(() => {
+        setOpen(true);
+      }, 100);
+    }
   }
 
   useEffect(() => {
